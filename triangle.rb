@@ -14,7 +14,7 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  sides = [a, b,c].sort
+  sides = [a, b, c].sort
   raise TriangleError if sides.min <= 0
   raise TriangleError if sides[0] + sides[1] <= sides[2]
 

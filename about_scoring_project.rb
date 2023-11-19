@@ -31,30 +31,14 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def score(dice)
   score = 0
-  # You need to write this method
   return score if dice.empty?
 
-  if dice.count(1) >= 3
-    dice.sort
-    3.times do
-      dice.shift
-    end
-    score += 1000
-  end
-
-  dice.each do |n|
-    next unless n != 1 && dice.count(n) >= 3
-
-    3.times do
-      dice.delete_at(dice.index(n))
-    end
-    score += n * 100
-  end
-
-  dice.each do |n|
-    puts "#{dice}, score: #{score}"
-    score += 50 if n == 5
-    score += 100 if n == 1
+  # Calculate score for each digit
+  (1..6).each do |num|
+    count = dice.count(num)
+    score += (num == 1 ? 1000 : num * 100) if count >= 3
+    score += (count % 3) * 100 if num == 1
+    score += (count % 3) * 50 if num == 5
   end
 
   score
